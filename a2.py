@@ -39,7 +39,8 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
              return None
         # 4) if the current thing in the pattern is an _
         elif pattern[pind] == "_":
-             return [source[sind]]
+            result.append(source[sind])
+            
         # 5) if the current thing in the pattern is the same as the current thing in the
         # source
         elif pattern[pind] == source[sind]:
@@ -56,7 +57,7 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
 
 if __name__ == "__main__":
     print(match(["x", "y", "z"], ["x", "y", "z"]))
-    assert match(["x", "y", "z"], ["x", "y", "z"]) == [], "test 1 failed"
+    assert match(["x", "y", "z"], ["x", "y", "z"] ) == [], "test 1 failed"
     print(match(["x", "z", "z"], ["x", "y", "z"]))
     assert match(["x", "z", "z"], ["x", "y", "z"]) == None, "test 2 failed"
     print(match(["x", "y"], ["x", "y", "z"]))
@@ -73,9 +74,9 @@ if __name__ == "__main__":
     assert match(["x", "%", "z"], ["x", "y", "z"]) == ["y"], "test 8 failed"
     print(match(["%", "z"], ["x", "y", "z"]))
     assert match(["%", "z"], ["x", "y", "z"]) == ["x y"], "test 9 failed"
-    print(match(["x", "%", "y"], ["x", "y", "z"]))
+    print(match(["x", "%", "y"], ["x", "y", "z"])) 
     assert match(["x", "%", "y"], ["x", "y", "z"]) == None, "test 10 failed"
-    print(match(["x", "%", "y", "z"], ["x", "y", "z"]))
+    print(match(["x", "%", "y", "z"], ["x", "y", "z"])) 
     assert match(["x", "%", "y", "z"], ["x", "y", "z"]) == [""], "test 11 failed"
     print(match(["x", "y", "z", "%"], ["x", "y", "z"]))
     assert match(["x", "y", "z", "%"], ["x", "y", "z"]) == [""], "test 12 failed"
