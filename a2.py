@@ -17,7 +17,7 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
     sind = 0 # current index we are looking at in source list
     pind = 0  # current index we are looking at in pattern list
     result: List[str] = []  # to store substitutions we will return if matched
-
+        
     # keep checking as long as we haven't hit the end of either pattern or source while
     # pind is still a valid index OR sind is still a valid index (valid index means that
     # the inHEREdex is != to the length of the list)
@@ -34,8 +34,20 @@ def match(pattern: List[str], source: List[str]) -> List[str]:
         # If you get stuck on this one, we encourage you to attempt the other conditions
         #   and come back to this one afterwards
         elif pattern[pind] == "%":
+            if pind == (len(pattern)-1):
+                result.append(" ".join(source[sind:]))
+                return result
+            else:
+                 accum = ""
+                 pind += 1
+                 while pattern[pind] != source[sind]:
+                      accum += source[sind] + " " 
+                      sind += 1
+                      if sind >= len(source):
+                        return None
+            result.append(accum.strip())
         # 3) if we reached the end of the source but not the pattern
-        if sind == len(source) and pind < len(pattern):
+        elif sind == len(source) and pind < len(pattern):
              return None
         # 4) if the current thing in the pattern is an _
         elif pattern[pind] == "_":
